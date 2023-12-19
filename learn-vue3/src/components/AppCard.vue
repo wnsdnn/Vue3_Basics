@@ -8,7 +8,8 @@
             <!-- :class="$style.red" -->
             <p class="card-text">{{ contents }}</p>
             <a href="#" class="btn" :class="isLikeClass" @click="toggleLike">좋아요</a>
-            {{ $props.obj }}
+            {{ abc }}
+            {{ cba }}
         </div>
     </div>
 </template>
@@ -16,8 +17,17 @@
 <script>
 import { computed, ref, useCssModule } from 'vue';
 
-
 export default {
+    // inject: ['message'],
+    inject: {
+        abc: {
+            from: 'message',
+        },
+        cba: {
+            from: 'default',
+            default: '없습니다.',
+        },
+    },
     props: {
         type: {
             type: String,
@@ -33,7 +43,7 @@ export default {
         },
         contents: {
             type: String,
-            required: true,
+            // required: true,
         },
         isLike: {
             type: Boolean,
@@ -58,7 +68,7 @@ export default {
 
         // ====================================================
 
-        console.log('props.title: ', props.title);
+        // console.log('props.title: ', props.title);
 
         const isLikeClass = computed(() => {
             return props.isLike ? 'btn-danger' : 'btn-outline-danger';
